@@ -21,12 +21,11 @@ async def root():
 async def get_post():
     return{"data" : "this is your data"}
 
-@app.post("/createposts")
+@app.post("/posts")
 async def  create_posts(post : Post): # we are referncing the Post function class and storing it in a post variable
-    
     print(post)
     print(post.dict())
 
-    return {"data" : "New Post created"}
+    return {"data" : post}
 
 

@@ -30,6 +30,6 @@ async def  create_posts(post : Post): # we are referncing the Post function clas
     post_dict['id'] = randrange(0,10000000)
     my_post.append(post_dict)
 
-    return {"data" : post_dict}
+    return {"data": post_dict}
 
 

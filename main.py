@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Response,status,HTTPException   
 from fastapi.params import Body # it helps to import the body details from the http request we defined in the postman tool 
 from typing import Optional
 from pydantic import BaseModel # it helps us to create a schema such that what kind of data should the client(frontend) send to the backend
@@ -16,6 +16,13 @@ class Post(BaseModel):
 my_post=[{"title": "title of the post 1" , "content" : "content of the post 1","id" : 1},
 {"title" : "favourite food", "content":"I like pizza" , "id" : 2}]
 
+
+def find_post(id):
+    for p in my_post : 
+        if p["id"]== id:
+            return p 
+
+
 @app.get("/")
 async def root():
     return{"message" : "welcome to API !!! "}
@@ -24,7 +31,7 @@ async def root():
 async def get_post():
     return{"data" : my_post}
 
-@app.post("/posts")
+@app.post("/posts",status_code=status.HTTP_201_CREATED)
 async def  create_posts(post : Post): # we are referncing the Post function class and storing it in a post variable
     post_dict= post.dict()
     post_dict['id'] = randrange(0,10000000)
@@ -32,4 +39,12 @@ async def  create_posts(post : Post): # we are referncing the Post function clas
 
     return {"data": post_dict}
 
+@app.get("/posts/{id}")
+def get_post(id:int , response : Response):
 
+    post=find_post(id)
+    if not post:
+      raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"post with this id {id} was not found ")
+    
+    return{"post_details" : post}

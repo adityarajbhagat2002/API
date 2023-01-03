@@ -11,7 +11,6 @@ class Post(BaseModel):
     title : str
     content: str
     published : bool=True
-    rating :Optional[int] =None
 
 my_post=[{"title": "title of the post 1" , "content" : "content of the post 1","id" : 1},
 {"title" : "favourite food", "content":"I like pizza" , "id" : 2}]
@@ -64,5 +63,8 @@ def delete_post(id:int):
     
     my_post.pop(index)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+
 
 

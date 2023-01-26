@@ -74,7 +74,7 @@ def update_post(id:int,post: Post):
         detail=f"post with id {id} is not found")
     
     post_dict=post.dict()
-    post_dict['id']=id
+    post_dict['id']=id          
     my_post[index]=post_dict
     return {"data" : post_dict}
 

@@ -7,7 +7,7 @@ from random import randrange
 
 app=FastAPI()
 
-class Post(BaseModel):
+class Post(BaseModel):#to define the schema for the client 
     title : str
     content: str
     published : bool=True
@@ -40,13 +40,12 @@ async def get_post():
 async def  create_posts(post : Post): # we are referncing the Post function class and storing it in a post variable
     post_dict= post.dict()
     post_dict['id'] = randrange(0,10000000)
-    my_post.append(post_dict)
+    my_post.append(post_dict) 
 
     return {"data": post_dict}
 
 @app.get("/posts/{id}")
 def get_post(id:int , response : Response):
-
     post=find_post(id)
     if not post:
       raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,

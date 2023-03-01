@@ -58,6 +58,7 @@ def get_post(id:int , response : Response):
 def delete_post(id:int):
     index=find_index_post(id)
     if index==None:
+        
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
         detail=f"post with id {id} is not found")
     

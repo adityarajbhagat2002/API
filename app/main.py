@@ -48,7 +48,7 @@ async def  create_posts(post : Post): # we are referncing the Post function clas
 def get_post(id:int , response : Response):
     post=find_post(id)
     if not post:
-      raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
         detail=f"post with this id {id} was not found ")
     
     return{"post_details" : post}

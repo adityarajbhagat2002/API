@@ -1,6 +1,6 @@
 from fastapi import FastAPI,Response,status,HTTPException   
 from fastapi.params import Body  # it helps to import the body details from the http request we defined in the postman tool 
-from typing import Optional
+from typing import Optional 
 from pydantic import BaseModel # it helps us to create a schema such that what kind of data should the client(frontend) send to the backend
 from random import randrange
 

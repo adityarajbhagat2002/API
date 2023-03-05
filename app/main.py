@@ -49,7 +49,7 @@ async def get_post():
     return{"data" : my_post}
 
 @app.post("/posts",status_code=status.HTTP_201_CREATED)
-async def  create_posts(post : Post): # we are referncing the Post function class and storing it in a post variable
+async def  create_posts(post :Post): # we are referncing the Post function class and storing it in a post variable
     post_dict= post.dict()
     post_dict['id'] = randrange(0,10000000)
     my_post.append(post_dict) 
@@ -78,8 +78,7 @@ def delete_post(id:int):
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 @app.put("/posts/{id}")
-def update_post(id:int,post: Post):
-   
+def update_post(id:int,post:Post):
     index=find_index_post(id)
     if index==None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,

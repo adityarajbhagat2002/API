@@ -4,7 +4,7 @@ from typing import Optional
 from pydantic import BaseModel # it helps us to create a schema such that what kind of data should the client(frontend) send to the backend
 from random import randrange
 import psycopg2
-from psycopg2.extras import  RealDictCursor
+from psycopg2.extras import RealDictCursor
 
 
 app=FastAPI()
@@ -14,13 +14,14 @@ class Post(BaseModel):#to define the schema for the client
     content: str
     published : bool=True
 
-try:
-    conn=psycopg2.connect(host='localhost', database='fastapi', user='postgres', password='aditya900',cursor_factory='RealDictCursor')
+try :
+    conn=psycopg2.connect(host="localhost" , database="fastapi" ,user ="postgres" , password="aditya900",
+    cursor_factory="RealDictCursor")
     cur = conn.cursor()
-    print("Database connection was established !!")
-except Exception as error:
-    print("Connection to database failed!!")
-    print("Error:" ,error)
+    print("Database connection was sucessfully established !!")
+except Exception as error : 
+    print("Connection to database failed")
+    print("Error : ", error)
 
     
 

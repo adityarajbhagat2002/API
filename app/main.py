@@ -3,6 +3,8 @@ from fastapi.params import Body  # it helps to import the body details from the 
 from typing import Optional  
 from pydantic import BaseModel # it helps us to create a schema such that what kind of data should the client(frontend) send to the backend
 from random import randrange
+import psycopg2
+from psycopg2 import 
 
 
 app=FastAPI()
@@ -11,6 +13,10 @@ class Post(BaseModel):#to define the schema for the client
     title : str
     content: str
     published : bool=True
+
+try:
+    conn=psycopg2.connect(host='localhost', database='fastapi', user='postgress', password='aditya900')
+
     
 
 my_post=[{"title": "title of the post 1" , "content" : "content of the post 1","id" : 1},

@@ -15,8 +15,12 @@ class Post(BaseModel):#to define the schema for the client
     published : bool=True
 
 try:
-    conn=psycopg2.connect(host='localhost', database='fastapi', user='postgress', password='aditya900',cursor_factory='RealDictCursor')
-    
+    conn=psycopg2.connect(host='localhost', database='fastapi', user='postgres', password='aditya900',cursor_factory='RealDictCursor')
+    cur = conn.cursor()
+    print("Database connection was established !!")
+except Exception as error:
+    print("Connection to database failed!!")
+    print("Error:" ,error)
 
     
 

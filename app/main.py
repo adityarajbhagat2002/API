@@ -9,14 +9,14 @@ from psycopg2.extras import RealDictCursor
 
 app=FastAPI()
 
-class Post(BaseModel):#to define the schema for the client 
+class Post(BaseModel):# to define the schema for the client 
     title : str
     content: str
     published : bool=True
 
 try :
     conn=psycopg2.connect(host="localhost" , database="fastapi" ,user ="postgres" , password="aditya900",
-    cursor_factory="RealDictCursor")
+    cursor_factory=RealDictCursor)
     cur = conn.cursor()
     print("Database connection was sucessfully established !!")
 except Exception as error : 
@@ -88,11 +88,5 @@ def update_post(id:int,post:Post):
     post_dict['id']=id          
     my_post[index]=post_dict
     return {"data" : post_dict}
-
-
-
-
-
-
 
 

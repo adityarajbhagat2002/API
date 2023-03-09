@@ -22,6 +22,7 @@ try :
 except Exception as error : 
     print("Connection to database failed")
     print("Error : ", error)
+    
 
     
 

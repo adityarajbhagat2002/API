@@ -22,9 +22,9 @@ try :
 except Exception as error : 
     print("Connection to database failed")
     print("Error : ", error)
-    
 
-    
+
+
 
 my_post=[{"title": "title of the post 1" , "content" : "content of the post 1","id" : 1},
 {"title" : "favourite food", "content":"I like pizza" , "id" : 2}]

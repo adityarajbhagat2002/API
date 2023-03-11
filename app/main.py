@@ -24,7 +24,7 @@ while True:
 
         conn = psycopg2.connect(host="localhost", database="fastapi", user="postgres", password="aditya900",
                                 cursor_factory=RealDictCursor)
-        cur = conn.cursor()
+        cursor = conn.cursor()
         print("Database connection was sucessfully established !!")
         break
     except Exception as error:
@@ -56,17 +56,16 @@ async def root():
 
 @app.get("/posts")
 async def get_post():
-    return {"data": my_post}
+    cursor.execute(""" SELECT * FROM posts """)
+    posts=cursor.fetchall()
+    return {"data": posts}
 
 
 @app.post("/posts", status_code=status.HTTP_201_CREATED)
 # we are referncing the Post function class and storing it in a post variable
 async def create_posts(post: Post):
-    post_dict = post.dict()
-    post_dict['id'] = randrange(0, 10000000)
-    my_post.append(post_dict)
-
-    return {"data": post_dict}
+    
+    return {"data": "Created post"}
 
 
 @app.get("/posts/{id}")

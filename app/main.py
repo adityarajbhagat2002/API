@@ -64,13 +64,18 @@ async def get_post():
 @app.post("/posts", status_code=status.HTTP_201_CREATED)
 # we are referncing the Post function class and storing it in a post variable
 async def create_posts(post: Post):
-    cursor.execute("""INSERT INTO posts (title , content , published) VALUES (%s, %s , %s )""" ,(post.title , 
-    post.content , post.published))
-    return {"data": "Created post"}
+    cursor.execute("""INSERT INTO posts (title , content , published) VALUES (%s, %s , %s )RETURNING *
+    """ ,(post.title , post.content , post.published))
+    new_post = cursor.fetchall()
+    conn.commit()
+    
+    return {"data": new_post}
 
 
 @app.get("/posts/{id}")
 def get_post(id: int, response: Response):
+    cursor.execute(""" SELECT * FROM posts WHERE id = 1 """)
+    test_post = cursor.fetchone()
     post = find_post(id)
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,

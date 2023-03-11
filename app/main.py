@@ -64,7 +64,8 @@ async def get_post():
 @app.post("/posts", status_code=status.HTTP_201_CREATED)
 # we are referncing the Post function class and storing it in a post variable
 async def create_posts(post: Post):
-    
+    cursor.execute("""INSERT INTO posts (title , content , published) VALUES (%s, %s , %s )""" ,(post.title , 
+    post.content , post.published))
     return {"data": "Created post"}
 
 

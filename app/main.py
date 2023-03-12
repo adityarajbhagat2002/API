@@ -76,7 +76,7 @@ async def create_posts(post: Post):
 def get_post(id: int, response: Response):
     cursor.execute(""" SELECT * FROM posts WHERE id = %s """,(str(id)))
     post = cursor.fetchone()
-  
+
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"post with this id {id} was not found ")

@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Response, status, HTTPException , Depends
+from fastapi import FastAPI, Response, status, HTTPException 
 # it helps to import the body details from the http request we defined in the postman tool
 from fastapi.params import Body
 from typing import Optional
@@ -8,26 +8,11 @@ from random import randrange
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import time
-from . import models
-from .database import engine ,SessionLocal 
-from sqlalchemy.orm import Session 
 
-
-
-
-
-
-models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+
 
 
 
@@ -71,6 +56,7 @@ def find_index_post(id):
 @app.get("/")
 async def root():
     return {"message": "welcome to API !!! "}
+
 
 
 @app.get("/posts")
@@ -128,7 +114,4 @@ def update_post(id: int, post: Post):
 
     return{"data" : updated_post}
 
-@app.get("/sqlalchemy")
-def test_posts(db: Session = Depends(get_db)):
-    return {"status" : "Success"}  
 

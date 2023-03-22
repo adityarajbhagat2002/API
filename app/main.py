@@ -108,3 +108,5 @@ def update_post(id: int, post: Post):
                             detail=f"post with id {id} is not found")
 
     return{"data" : updated_post}
+
+

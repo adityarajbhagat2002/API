@@ -40,7 +40,7 @@ while True:
 
 
 my_post = [{"title": "title of the post 1", "content": "content of the post 1", "id": 1},
-           {"title": "favourite food", "content": "I like pizza", "id": 2}]
+        {"title": "favourite food", "content": "I like pizza", "id": 2}]
 
 
 def find_post(id):
@@ -111,7 +111,7 @@ def delete_post(id: int):
 @app.put("/posts/{id}")
 def update_post(id: int, post: Post):
     cursor.execute(""" UPDATE posts SET title=%s  , content =%s ,published = %s  WHERE id = %s RETURNING * """,
-                   (post.title, post.content, post.published, str(id)))
+                (post.title, post.content, post.published, str(id)))
     updated_post = cursor.fetchone()
     conn.commit()
 
@@ -120,3 +120,5 @@ def update_post(id: int, post: Post):
                             detail=f"post with id {id} is not found")
 
     return {"data": updated_post}
+
+

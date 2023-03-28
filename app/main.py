@@ -1,4 +1,3 @@
-import sys
 from fastapi import FastAPI, Response, status, HTTPException, Depends
 # it helps to import the body details from the http request we defined in the postman tool
 from fastapi.params import Body
@@ -120,5 +119,4 @@ def update_post(id: int, post: Post):
                             detail=f"post with id {id} is not found")
 
     return {"data": updated_post}
-
 
